@@ -1,88 +1,100 @@
-/* 背景全体 */
+/* ====================
+   全体のベース設定
+==================== */
 body {
   margin: 0;
-  font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-  background: #e5ddd5;
+  padding: 0;
+  background-color: #e5ddd5;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-/* チャット全体 */
+/* ====================
+   チャット本体
+==================== */
 .chat-container {
   width: 100%;
-  max-width: 480px;
+  max-width: 390px;
   height: 90vh;
-  background: #fdfdfd;
-  border-radius: 10px;
+  background-color: #fff;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* チャット欄 */
+/* ====================
+   メッセージ表示エリア
+==================== */
 .chat-box {
   flex: 1;
-  padding: 15px;
+  padding: 16px;
   overflow-y: auto;
-  background: #fafafa;
+  background-color: #f9f9f9;
 }
 
-/* メッセージの共通 */
+/* 吹き出しの共通 */
 .message {
-  max-width: 80%;
+  max-width: 75%;
+  padding: 10px 14px;
   margin-bottom: 10px;
-  padding: 10px 15px;
-  border-radius: 18px;
-  line-height: 1.4;
-  white-space: pre-wrap;
+  border-radius: 16px;
+  line-height: 1.6;
+  font-size: 15px;
   word-wrap: break-word;
+  white-space: pre-wrap;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-/* ユーザー（右） */
+/* ユーザーの吹き出し（右側） */
 .message.user {
-  background: #dcf8c6;
   align-self: flex-end;
-  border-bottom-right-radius: 0;
+  background-color: #dcf8c6;
+  border-bottom-right-radius: 4px;
 }
 
-/* Bot（左） */
+/* Botの吹き出し（左側） */
 .message.bot {
-  background: #fff;
   align-self: flex-start;
-  border-bottom-left-radius: 0;
+  background-color: #ffffff;
   border: 1px solid #ddd;
+  border-bottom-left-radius: 4px;
 }
 
-/* 入力エリア */
+/* ====================
+   入力欄
+==================== */
 .input-area {
   display: flex;
-  padding: 10px;
-  background: #fff;
-  border-top: 1px solid #ccc;
+  padding: 12px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
 }
 
 .input-area input {
   flex: 1;
-  padding: 10px 12px;
+  padding: 10px 14px;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 22px;
   font-size: 14px;
   outline: none;
 }
 
 .input-area button {
   margin-left: 10px;
-  padding: 10px 16px;
+  padding: 10px 18px;
   border: none;
-  border-radius: 20px;
+  border-radius: 22px;
   background-color: #4caf50;
   color: white;
   font-weight: bold;
+  font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .input-area button:hover {
