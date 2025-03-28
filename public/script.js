@@ -6,6 +6,7 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
 // ✅ OpenAI 初期化（v4対応）
 const openai = new OpenAI({
