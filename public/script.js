@@ -39,3 +39,26 @@ async function sendMessage() {
 
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+function sendMessage() {
+  const input = document.getElementById('user-input');
+  const message = input.value.trim();
+  if (message === '') return;
+
+  const messageRow = document.createElement('div');
+  messageRow.classList.add('message-row', 'user');
+
+  const avatar = document.createElement('img');
+  avatar.src = 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
+  avatar.alt = 'user';
+  avatar.classList.add('avatar');
+
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message', 'user');
+  messageDiv.textContent = message;
+
+  messageRow.appendChild(avatar);
+  messageRow.appendChild(messageDiv);
+  document.getElementById('chat-box').appendChild(messageRow);
+
+  input.value = '';
+}
