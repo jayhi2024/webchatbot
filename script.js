@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ OpenAIの新しい書き方（v4以降）
+// ✅ OpenAI 初期化（v4方式）
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -21,8 +21,7 @@ app.post("/api/chat", async (req, res) => {
       messages: [
         {
           role: "system",
-          content:
-            "あなたは『ほのぼのサロン』の主です。やさしくてちょっとユーモラスに、ユーザーの話に寄り添いながら返答してください。会話の最後には自然にサロンへの誘いを含めてください。",
+          content: "あなたは『ほのぼのサロン』の主です。やさしくてユーモラスに、サロンへの誘導も自然に入れて返答してください。",
         },
         {
           role: "user",
