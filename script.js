@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ OpenAI 初期化（v4方式）
+// ✅ OpenAI 初期化（v4対応）
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
