@@ -1,45 +1,41 @@
-const express = require("express");
-const cors = require("cors");
-const { OpenAI } = require("openai");
-require("dotenv").config();
+async function sendMessage() {
+  const input = document.getElementById("user-input");
+  const chatBox = document.getElementById("chat-box");
+  const message = input.value.trim();
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static("public"));
+  if (!message) return;
 
-// ✅ OpenAI 初期化（v4対応）
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+  // ユーザーの吹き出しを追加
+  const userMessage = document.createElement("div");
+  userMessage.className = "message user";
+  userMessage.textContent = message;
+  chatBox.appendChild(userMessage);
 
-app.post("/api/chat", async (req, res) => {
-  const userMessage = req.body.message;
+  // 入力欄をクリア
+  input.value = "";
+
+  // Botの仮メッセージ
+  const botMessage = document.createElement("div");
+  botMessage.className = "message bot";
+  botMessage.textContent = "考え中...";
+  chatBox.appendChild(botMessage);
 
   try {
-    const gptResponse = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content: "あなたは『ほのぼのサロン』の主です。やさしくてユーモラスに、サロンへの誘導も自然に入れて返答してください。",
-        },
-        {
-          role: "user",
-          content: userMessage,
-        },
-      ],
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
     });
 
-    const reply = gptResponse.choices[0].message.content.trim();
-    res.json({ reply });
-  } catch (error) {
-    console.error("GPTエラー:", error);
-    res.status(500).json({ reply: "エラーが発生しました。" });
-  }
-});
+    const data = await response.json();
+    botMessage.textContent = data.reply;
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+  } catch (error) {
+    botMessage.textContent = "エラーが発生しました";
+    console.error("Fetch error:", error);
+  }
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
