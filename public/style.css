@@ -106,3 +106,27 @@ body {
     border: none;
   }
 }
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+
+.message-row.bot {
+  justify-content: flex-start;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 0 8px;
+  object-fit: cover;
+}
+
