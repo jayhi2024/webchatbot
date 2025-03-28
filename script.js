@@ -1,40 +1,45 @@
-async function sendMessage() {
-  const input = document.getElementById("user-input");
-  const chatBox = document.getElementById("chat-box");
-  const message = input.value.trim();
+const express = require("express");
+const cors = require("cors");
+const { OpenAI } = require("openai");
+require("dotenv").config();
 
-  if (!message) return;
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-  // ユーザーの吹き出しを表示
-  const userMessage = document.createElement("div");
-  userMessage.className = "message user";
-  userMessage.textContent = message;
-  chatBox.appendChild(userMessage);
+// ✅ OpenAIの新しい書き方（v4以降）
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-  // 入力リセット
-  input.value = "";
-
-  // Botの吹き出し（仮：読み込み中）
-  const botMessage = document.createElement("div");
-  botMessage.className = "message bot";
-  botMessage.textContent = "考え中……";
-  chatBox.appendChild(botMessage);
-  chatBox.scrollTop = chatBox.scrollHeight;
+app.post("/api/chat", async (req, res) => {
+  const userMessage = req.body.message;
 
   try {
-    const res = await fetch("https://webchatbot-cuw4.onrender.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ message })
+    const gptResponse = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content:
+            "あなたは『ほのぼのサロン』の主です。やさしくてちょっとユーモラスに、ユーザーの話に寄り添いながら返答してください。会話の最後には自然にサロンへの誘いを含めてください。",
+        },
+        {
+          role: "user",
+          content: userMessage,
+        },
+      ],
     });
 
-    const data = await res.json();
-    botMessage.textContent = data.reply;
+    const reply = gptResponse.choices[0].message.content.trim();
+    res.json({ reply });
   } catch (error) {
-    botMessage.textContent = "エラーが発生しました🥲";
+    console.error("GPTエラー:", error);
+    res.status(500).json({ reply: "エラーが発生しました。" });
   }
+});
 
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
