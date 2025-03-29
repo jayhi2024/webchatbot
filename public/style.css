@@ -171,3 +171,18 @@ body {
     width: 100%;
   }
 }
+/* 入力エリア完全固定（最終修正版） */
+.input-area {
+  position: fixed; /* ←fixedで画面基準で固定 */
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+}
