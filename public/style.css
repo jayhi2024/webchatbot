@@ -162,3 +162,23 @@ html, body {
     max-width: 100%;
   }
 }
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden; /* 横スクロールを完全に防止 */
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.input-area {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
+}
