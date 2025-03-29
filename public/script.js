@@ -5,12 +5,12 @@ async function sendMessage() {
 
   if (!message) return;
 
-  // ユーザーの吹き出し
+  // ==== ユーザーの吹き出し ====
   const userRow = document.createElement("div");
   userRow.classList.add("message-row", "user");
 
   const userAvatar = document.createElement("img");
-  userAvatar.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+  userAvatar.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; // ユーザーアイコン
   userAvatar.alt = "user";
   userAvatar.classList.add("avatar");
 
@@ -24,12 +24,12 @@ async function sendMessage() {
 
   input.value = "";
 
-  // Botの「考え中...」
+  // ==== Botの考え中アニメーション ====
   const botRow = document.createElement("div");
   botRow.classList.add("message-row", "bot");
 
   const botAvatar = document.createElement("img");
-  botAvatar.src = "https://t-brn.com/s/img12.jpg";
+  botAvatar.src = "https://t-brn.com/s/img12.jpg"; // Botアイコン
   botAvatar.alt = "bot";
   botAvatar.classList.add("avatar");
 
@@ -43,7 +43,7 @@ async function sendMessage() {
 
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  // 実際の返信（ダミーAPI）
+  // ==== APIリクエスト（ダミーOK） ====
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
@@ -54,6 +54,8 @@ async function sendMessage() {
     });
 
     const data = await response.json();
+
+    // Botの返信に置き換え
     botBubble.textContent = data.reply;
 
   } catch (error) {
