@@ -36,50 +36,73 @@ body {
   gap: 12px;
 }
 
-/* 吹き出し */
-.message {
-  max-width: 80%;
-  padding: 10px 14px;
-  border-radius: 18px;
-  font-size: 15px;
-  line-height: 1.4;
-  word-break: break-word;
-  position: relative;
-}
-
-.message.user {
-  background-color: #d4f8c4;
-  align-self: flex-end;
-  border-bottom-right-radius: 4px;
-}
-
-.message.bot {
-  background-color: #f0f0f0;
-  align-self: flex-start;
-  border-bottom-left-radius: 4px;
-}
-
-/* メッセージとアイコンの行 */
+/* メッセージ行（吹き出し＋アイコン＋時間） */
 .message-row {
   display: flex;
   align-items: flex-end;
+  margin-bottom: 8px;
+  position: relative;
 }
 
+/* Botメッセージ（左寄せ） */
 .message-row.bot {
   justify-content: flex-start;
+  flex-direction: row;
 }
 
+/* Userメッセージ（右寄せ） */
 .message-row.user {
   justify-content: flex-end;
   flex-direction: row-reverse;
 }
 
+/* 吹き出し本体 */
+.message {
+  max-width: 80%;
+  padding: 10px 14px;
+  font-size: 15px;
+  line-height: 1.5;
+  border-radius: 18px;
+  word-break: break-word;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Bot吹き出し */
+.message.bot {
+  background-color: #f0f0f0;
+  border-radius: 18px 18px 18px 4px;
+  color: #333;
+}
+
+/* User吹き出し */
+.message.user {
+  background-color: #d4f8c4;
+  border-radius: 18px 18px 4px 18px;
+  color: #222;
+}
+
+/* アバター */
 .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   margin: 0 8px;
   object-fit: cover;
+}
+
+/* 吹き出しの下に時間＋既読 */
+.timestamp {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+  margin-left: 44px;
+}
+
+.message-row.user .timestamp {
+  text-align: right;
+  margin-left: 0;
+  margin-right: 44px;
 }
 
 /* 入力欄 */
