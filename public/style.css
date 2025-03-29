@@ -229,3 +229,15 @@ body {
   margin-right: 8px;
   margin-left: 0;
 }
+.message.user {
+  margin-left: 8px;   /* アイコンとの隙間 */
+  margin-right: 0;    /* 右端に寄せる */
+  align-self: flex-end;
+  background-color: #d4f8c4;
+  border-radius: 18px 18px 4px 18px;
+}
+.message-row.user {
+  justify-content: flex-end;
+  flex-direction: row-reverse; /* ← これ重要：アバターを右、吹き出しを左に配置 */
+  align-items: flex-end;
+}
