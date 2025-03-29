@@ -36,24 +36,34 @@ body {
   gap: 12px;
 }
 
-/* メッセージ行（吹き出し＋アイコン＋時間） */
+/* メッセージ行 */
 .message-row {
   display: flex;
   align-items: flex-end;
   margin-bottom: 8px;
-  position: relative;
 }
 
-/* Botメッセージ（左寄せ） */
+/* ユーザー（右寄せ） */
+.message-row.user {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}
+
+.message-row.user .avatar {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* ボット（左寄せ） */
 .message-row.bot {
   justify-content: flex-start;
   flex-direction: row;
 }
 
-/* Userメッセージ（右寄せ） */
-.message-row.user {
-  justify-content: flex-end;
-  flex-direction: row-reverse;
+.message-row.bot .avatar {
+  margin-right: 8px;
+  margin-left: 0;
 }
 
 /* 吹き出し本体 */
@@ -68,30 +78,30 @@ body {
   position: relative;
 }
 
-/* Bot吹き出し */
-.message.bot {
-  background-color: #f0f0f0;
-  border-radius: 18px 18px 18px 4px;
-  color: #333;
-}
-
-/* User吹き出し */
+/* 吹き出しデザイン */
 .message.user {
   background-color: #d4f8c4;
   border-radius: 18px 18px 4px 18px;
   color: #222;
+  margin-right: 4px;
 }
 
-/* アバター */
+.message.bot {
+  background-color: #f0f0f0;
+  border-radius: 18px 18px 18px 4px;
+  color: #333;
+  margin-left: 4px;
+}
+
+/* アイコン */
 .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin: 0 8px;
   object-fit: cover;
 }
 
-/* 吹き出しの下に時間＋既読 */
+/* 時間・既読 */
 .timestamp {
   font-size: 11px;
   color: #999;
@@ -144,6 +154,38 @@ body {
 .chat-box::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 3px;
+}
+
+/* 考え中...アニメーション */
+.dots {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.dots span {
+  display: inline-block;
+  animation: wave 1.2s infinite ease-in-out;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+.dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes wave {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+  }
 }
 
 /* モバイル対応 */
