@@ -194,3 +194,38 @@ body {
     border: none;
   }
 }
+/* ユーザー右寄せ */
+.message-row.user {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}
+
+/* 吹き出しの位置調整（右側に寄せる） */
+.message.user {
+  margin-left: 40px;  /* アイコン分だけ左に余白を取る */
+  margin-right: 8px;  /* 画面右端との距離 */
+  background-color: #d4f8c4;
+  align-self: flex-end;
+  border-radius: 18px 18px 4px 18px;
+}
+
+/* Bot吹き出しはそのままでOK */
+.message.bot {
+  margin-right: 40px;
+  margin-left: 8px;
+  background-color: #f0f0f0;
+  border-radius: 18px 18px 18px 4px;
+}
+
+/* ユーザーアイコン調整 */
+.message-row.user .avatar {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* Botアイコン調整（おまけ） */
+.message-row.bot .avatar {
+  margin-right: 8px;
+  margin-left: 0;
+}
