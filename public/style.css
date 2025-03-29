@@ -14,7 +14,7 @@ body {
   height: 100vh;
 }
 
-/* チャット全体の囲み */
+/* チャット全体 */
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ body {
   background-color: #fff;
 }
 
-/* チャット表示部分 */
+/* チャット表示エリア */
 .chat-box {
   flex: 1;
   overflow-y: auto;
@@ -36,7 +36,7 @@ body {
   gap: 12px;
 }
 
-/* メッセージのスタイル */
+/* 吹き出し */
 .message {
   max-width: 80%;
   padding: 10px 14px;
@@ -48,18 +48,41 @@ body {
 }
 
 .message.user {
-  align-self: flex-end;
   background-color: #d4f8c4;
+  align-self: flex-end;
   border-bottom-right-radius: 4px;
 }
 
 .message.bot {
-  align-self: flex-start;
   background-color: #f0f0f0;
+  align-self: flex-start;
   border-bottom-left-radius: 4px;
 }
 
-/* 入力エリア */
+/* メッセージとアイコンの行 */
+.message-row {
+  display: flex;
+  align-items: flex-end;
+}
+
+.message-row.bot {
+  justify-content: flex-start;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 0 8px;
+  object-fit: cover;
+}
+
+/* 入力欄 */
 .input-area {
   display: flex;
   padding: 10px;
@@ -91,7 +114,7 @@ body {
   background-color: #57b257;
 }
 
-/* スクロールバーを少し細く */
+/* スクロールバー */
 .chat-box::-webkit-scrollbar {
   width: 6px;
 }
@@ -100,33 +123,9 @@ body {
   border-radius: 3px;
 }
 
-/* スマホ対応 */
+/* モバイル対応 */
 @media screen and (max-width: 480px) {
   .chat-container {
     border: none;
   }
 }
-
-.message-row {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 8px;
-}
-
-.message-row.bot {
-  justify-content: flex-start;
-}
-
-.message-row.user {
-  justify-content: flex-end;
-  flex-direction: row-reverse;
-}
-
-.avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin: 0 8px;
-  object-fit: cover;
-}
-
