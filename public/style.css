@@ -1,4 +1,4 @@
-/* リセット＆ベース */
+/* ===== リセット ===== */
 html, body {
   height: 100%;
   margin: 0;
@@ -7,26 +7,20 @@ html, body {
   background-color: #f5f5f5;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* チャットコンテナ */
+/* ===== チャット全体の囲い ===== */
 .chat-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 480px;
-  height: 100dvh; /* モバイル対応で必須！ */
+  height: 100dvh; /* モバイル対応 */
   background-color: #fff;
   border: 1px solid #ddd;
   overflow: hidden;
   position: relative;
+  max-width: 100%; /* スマホで横スクロール防止 */
 }
 
-/* チャットメッセージエリア */
+/* ===== チャット表示エリア ===== */
 .chat-box {
   flex: 1;
   overflow-y: auto;
@@ -34,39 +28,37 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding-bottom: 80px; /* 入力欄と重ならないように */
+  padding-bottom: 90px; /* 入力欄と重ならないように余白 */
+  box-sizing: border-box;
 }
 
-/* メッセージ行共通 */
+/* ===== メッセージ行 ===== */
 .message-row {
   display: flex;
   align-items: flex-end;
   margin-bottom: 8px;
 }
 
-/* ユーザー：右寄せ（完全対応） */
 .message-row.user {
   flex-direction: row-reverse;
-  justify-content: flex-end; /* これで完全右端寄せ確定！ */
+  justify-content: flex-end;
 }
 
-/* ボット：左寄せ */
 .message-row.bot {
   justify-content: flex-start;
 }
 
-/* 吹き出し共通 */
+/* ===== 吹き出し本体 ===== */
 .message {
   max-width: 80%;
   padding: 10px 14px;
   font-size: 15px;
   line-height: 1.5;
   word-break: break-word;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 18px;
 }
 
-/* 吹き出し：ユーザー側 */
 .message.user {
   background-color: #d4f8c4;
   color: #222;
@@ -74,15 +66,14 @@ body {
   margin-left: 8px;
 }
 
-/* 吹き出し：ボット側 */
 .message.bot {
   background-color: #f0f0f0;
   color: #333;
   border-radius: 18px 18px 18px 4px;
-  margin-left: 8px;
+  margin-right: 8px;
 }
 
-/* アバター画像 */
+/* ===== アバター画像 ===== */
 .avatar {
   width: 32px;
   height: 32px;
@@ -90,24 +81,23 @@ body {
   object-fit: cover;
 }
 
-/* 入力エリア完全固定 */
+/* ===== 入力エリア（常に下部に固定） ===== */
 .input-area {
-  display: flex;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  background-color: #fff;
-  position: fixed; /* ← 絶対固定化 */
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  right: 0;
-  z-index: 10;
+  max-width: 100%;
+  display: flex;
+  padding: 10px;
+  box-sizing: border-box;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  z-index: 100;
   box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
 }
 
-/* 入力エリア内要素 */
+/* ===== 入力欄とボタン ===== */
 .input-area input {
   flex: 1;
   padding: 10px 14px;
@@ -115,6 +105,7 @@ body {
   border-radius: 25px;
   font-size: 15px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .input-area button {
@@ -132,7 +123,7 @@ body {
   background-color: #57b257;
 }
 
-/* 考え中...アニメーション */
+/* ===== 考え中... アニメーション ===== */
 .dots {
   display: inline-block;
   margin-left: 4px;
@@ -150,39 +141,24 @@ body {
 .dots span:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes wave {
-  0%,60%,100% { transform: translateY(0); }
+  0%, 60%, 100% { transform: translateY(0); }
   30% { transform: translateY(-6px); }
 }
 
-/* スクロールバー調整（細くする） */
+/* ===== スクロールバー（細く） ===== */
 .chat-box::-webkit-scrollbar { width: 6px; }
 .chat-box::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 3px;
 }
 
-/* モバイル対応時の微調整 */
+/* ===== モバイル調整 ===== */
 @media screen and (max-width: 480px) {
   .chat-container {
     border: none;
   }
+
   .input-area {
-    max-width: none;
-    width: 100%;
+    max-width: 100%;
   }
-}
-/* 入力エリア完全固定（最終修正版） */
-.input-area {
-  position: fixed; /* ←fixedで画面基準で固定 */
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 480px;
-  display: flex;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  background-color: #fff;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
-  z-index: 100;
 }
