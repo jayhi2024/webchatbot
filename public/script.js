@@ -63,3 +63,6 @@ async function sendMessage() {
 
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+botBubble.innerHTML = '考え中<span class="dots"><span>.</span><span>.</span><span>.</span></span>';
+
