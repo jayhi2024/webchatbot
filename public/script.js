@@ -5,7 +5,7 @@ async function sendMessage() {
 
   if (!message) return;
 
-  // ユーザーの吹き出しを追加（アイコン付き）
+  // ユーザーの吹き出し
   const userRow = document.createElement("div");
   userRow.classList.add("message-row", "user");
 
@@ -35,7 +35,7 @@ async function sendMessage() {
 
   const botBubble = document.createElement("div");
   botBubble.classList.add("message", "bot");
-  botBubble.textContent = "考え中...";
+  botBubble.innerHTML = '考え中<span class="dots"><span>.</span><span>.</span><span>.</span></span>';
 
   botRow.appendChild(botAvatar);
   botRow.appendChild(botBubble);
@@ -43,7 +43,7 @@ async function sendMessage() {
 
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  // APIに問い合わせ（ここはダミーでもOK）
+  // 実際の返信（ダミーAPI）
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
@@ -63,6 +63,3 @@ async function sendMessage() {
 
   chatBox.scrollTop = chatBox.scrollHeight;
 }
-
-botBubble.innerHTML = '考え中<span class="dots"><span>.</span><span>.</span><span>.</span></span>';
-
